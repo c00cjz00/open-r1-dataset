@@ -1,8 +1,8 @@
 python generate_cot_from_Q.py \
-	--hf-dataset c00cjz00/ft_dataset_parquet \
-	--hf-dataset-config b8.3-patch4_v1 \
+	--hf-dataset lianghsun/tw-instruct-500k \
+	--hf-dataset-config default \
 	--hf-dataset-split train \
-	--hf-output-dataset c00cjz00/b8.3-patch4_v1-save \
+	--hf-output-dataset c00cjz00/tw-instruct-500k-demo_Q \
 	--vllm-server-url https://integrate.api.nvidia.com/v1 \
 	--model deepseek-ai/deepseek-r1 \
 	--temperature 0.6 \
@@ -10,7 +10,7 @@ python generate_cot_from_Q.py \
 	--num-generations 1 \
 	--input-batch-size 4 \
 	--page 1 \
-	--page-size 64 \
+	--page-size 4 \
 	--client-replicas 2 \
 	--timeout 600 \
 	--retries 3 \

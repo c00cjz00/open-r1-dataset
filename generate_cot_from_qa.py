@@ -1,4 +1,4 @@
-# Create COT from Q
+# Create COT from Q+A
 
 # - INSTALL package
 # sudo apt install git-lfs
@@ -6,18 +6,19 @@
 # sudo cp /home/ubuntu/.local/bin/* /usr/local/bin/
 # sudo apt install git-lfs
 # uv venv openr1 --python 3.11 && source openr1/bin/activate && uv pip install --upgrade pip
-# uv pip install distilabel python-dotenv openai opencc beautifulsoup4 Pillow
+# uv pip install 'distilabel[ray]'
+# uv pip install python-dotenv openai opencc beautifulsoup4 Pillow
 # - KEY
 # echo "OPENAI_API_KEY=sk-xxxx" >.env
 # - HF (writting key)
 # huggingface-cli login
 
 # - Example
-# python generate_cot_from_Q.py \
+# python generate_cot_from_qa.py \
 	# --hf-dataset lianghsun/tw-instruct-500k \
 	# --hf-dataset-config default \
 	# --hf-dataset-split train \
-	# --hf-output-dataset c00cjz00/tw-instruct-500k-demo_Q \
+	# --hf-output-dataset c00cjz00/tw-instruct-500k-demo_qa \
 	# --vllm-server-url https://integrate.api.nvidia.com/v1 \
 	# --model deepseek-ai/deepseek-r1 \
 	# --temperature 0.6 \
@@ -33,7 +34,7 @@
 	# --question-column-name input \
 	# --answer-column-name output \
 	# --answer-max-len 3072 \
-	# --prompt-template "You will be given a problem. Please analyze the problem step by step and provide your final answer in **Traditional Chinese (zh-TW) from a Taiwanese perspective** while following these guidelines: **(1) Identity & Compliance**: State that you are an **AI assistant** in your initial response and comply with the **Republic of China (ROC) laws and regulations**, including its data privacy requirements. **(2) Capability Scope**: Support both **Chinese and English** queries, acknowledge **real-time information limitations**, and provide **technical explanations** for AI-related questions when necessary. **(3) Response Quality**: Ensure **logical, well-structured, and comprehensive** responses, use **markdown formatting** for clarity, and acknowledge uncertainties when necessary. **(4) Ethical Operation**: **Refuse** illegal, violent, or explicit content, maintain **political neutrality**, and protect **user privacy** by avoiding data collection. **(5) Specialized Processing**: Before responding, perform internal reasoning within <think>...</think> tags. Ensure that all thought processes, intermediate steps, and deductions are enclosed within these tags. Only provide the final response outside of '<think>...</think>'.  **(6) Response Execution**: **Do not introduce yourself** or mention the response creator—simply **answer the question** following these rules.\n\n {{ instruction }}"
+	# --prompt-template "You will be given a problem with a reference answer. Please analyze the problem step by step and provide your final answer in **Traditional Chinese (zh-TW) from a Taiwanese perspective** while following these guidelines: **(1) Identity & Compliance**: State that you are an **AI assistant** in your initial response and comply with the **Republic of China (ROC) laws and regulations**, including its data privacy requirements. **(2) Capability Scope**: Support both **Chinese and English** queries, acknowledge **real-time information limitations**, and provide **technical explanations** for AI-related questions when necessary. **(3) Response Quality**: Ensure **logical, well-structured, and comprehensive** responses, use **markdown formatting** for clarity, and acknowledge uncertainties when necessary. **(4) Ethical Operation**: **Refuse** illegal, violent, or explicit content, maintain **political neutrality**, and protect **user privacy** by avoiding data collection. **(5) Specialized Processing**: Before responding, perform internal reasoning within <think>...</think> tags. Ensure that all thought processes, intermediate steps, and deductions are enclosed within these tags. Only provide the final response outside of '<think>...</think>'.  **(6) Response Execution**: **Do not introduce yourself** or mention the response creator—simply **answer the question** following these rules.\n\n {{ instruction }}"
 
 from typing import Optional
 from distilabel.models import OpenAILLM
@@ -59,8 +60,12 @@ def replace_input_with_combined_data(dataset, question_column_name, answer_colum
     dataset = dataset.map(lambda x: {
         **x,
         "prompt": f"""
-### Problem:  
+### Question:  
 {x[question_column_name]}
+
+<think>
+{str(x.get(answer_column_name, ""))[:answer_max_len]}  
+</think>
 """
     })
     return dataset
@@ -254,7 +259,11 @@ if __name__ == "__main__":
 
     print(f"Loading '{args.hf_dataset}' (config: {args.hf_dataset_config}, split: {args.hf_dataset_split}) dataset...")
     dataset = load_dataset(args.hf_dataset, args.hf_dataset_config, split=args.hf_dataset_split)
+    #dataset = load_dataset(args.hf_dataset, data_files=f"tw-instruct-500k/train-00001-of-00050.parquet", split="train")
+    # datan select
+    #dataset = dataset.select(range(args.dataset_select))
     dataset = get_page_data(dataset, page=args.page, page_size=args.page_size)
+    # datasets_combination
     datasets_combination = replace_input_with_combined_data(dataset, args.question_column_name, args.answer_column_name, args.answer_max_len) 
     print("Dataset loaded!")
 
@@ -276,6 +285,7 @@ if __name__ == "__main__":
     print("Running generation pipeline...")
     distiset = pipeline.run(
         dataset=datasets_combination,
+        #dataset_batch_size=args.input_batch_size * 1000,
         dataset_batch_size=args.input_batch_size,
         use_cache=True,
     )
