@@ -11,9 +11,9 @@ python generate_cot_from_qa.py \
 	--input-batch-size 8 \
 	--page 1 \
 	--page-size 64 \
-	--client-replicas 2 \
+	--client-replicas 1 \
 	--timeout 600 \
-	--retries 2 \
+	--retries 1 \
 	--prompt-column prompt \
 	--question-column-name input \
 	--answer-column-name output \

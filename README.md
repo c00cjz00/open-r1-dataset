@@ -44,12 +44,12 @@ python generate_cot_from_Q.py \
 	--temperature 0.6 \
 	--max-new-tokens 8192 \
 	--num-generations 1 \
-	--input-batch-size 4 \
+	--input-batch-size 8 \
 	--page 1 \
-	--page-size 4 \
-	--client-replicas 2 \
+	--page-size 64 \
+	--client-replicas 1 \
 	--timeout 600 \
-	--retries 3 \
+	--retries 1 \
 	--prompt-column prompt \
 	--question-column-name input \
 	--answer-column-name output \
@@ -133,12 +133,12 @@ python generate_cot_from_qa.py \
 	--temperature 0.6 \
 	--max-new-tokens 8192 \
 	--num-generations 1 \
-	--input-batch-size 4 \
+	--input-batch-size 8 \
 	--page 1 \
-	--page-size 4 \
-	--client-replicas 2 \
+	--page-size 64 \
+	--client-replicas 1 \
 	--timeout 600 \
-	--retries 3 \
+	--retries 1 \
 	--prompt-column prompt \
 	--question-column-name input \
 	--answer-column-name output \
