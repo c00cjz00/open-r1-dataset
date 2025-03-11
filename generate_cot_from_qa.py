@@ -6,8 +6,7 @@
 # sudo cp /home/ubuntu/.local/bin/* /usr/local/bin/
 # sudo apt install git-lfs
 # uv venv openr1 --python 3.11 && source openr1/bin/activate && uv pip install --upgrade pip
-# uv pip install 'distilabel[ray]'
-# uv pip install python-dotenv openai opencc beautifulsoup4 Pillow
+# uv pip install distilabel python-dotenv openai opencc beautifulsoup4 Pillow
 # - KEY
 # echo "OPENAI_API_KEY=sk-xxxx" >.env
 # - HF (writting key)
@@ -24,12 +23,12 @@
 	# --temperature 0.6 \
 	# --max-new-tokens 8192 \
 	# --num-generations 1 \
-	# --input-batch-size 4 \
+	# --input-batch-size 8 \
 	# --page 1 \
-	# --page-size 4 \
+	# --page-size 64 \
 	# --client-replicas 2 \
 	# --timeout 600 \
-	# --retries 3 \
+	# --retries 2 \
 	# --prompt-column prompt \
 	# --question-column-name input \
 	# --answer-column-name output \
@@ -259,11 +258,7 @@ if __name__ == "__main__":
 
     print(f"Loading '{args.hf_dataset}' (config: {args.hf_dataset_config}, split: {args.hf_dataset_split}) dataset...")
     dataset = load_dataset(args.hf_dataset, args.hf_dataset_config, split=args.hf_dataset_split)
-    #dataset = load_dataset(args.hf_dataset, data_files=f"tw-instruct-500k/train-00001-of-00050.parquet", split="train")
-    # datan select
-    #dataset = dataset.select(range(args.dataset_select))
     dataset = get_page_data(dataset, page=args.page, page_size=args.page_size)
-    # datasets_combination
     datasets_combination = replace_input_with_combined_data(dataset, args.question_column_name, args.answer_column_name, args.answer_max_len) 
     print("Dataset loaded!")
 
@@ -286,7 +281,7 @@ if __name__ == "__main__":
     distiset = pipeline.run(
         dataset=datasets_combination,
         #dataset_batch_size=args.input_batch_size * 1000,
-        dataset_batch_size=args.input_batch_size,
+        dataset_batch_size=args.input_batch_size * args.page_size,
         use_cache=True,
     )
     print("Generation pipeline finished!")
