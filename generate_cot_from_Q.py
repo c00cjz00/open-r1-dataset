@@ -36,9 +36,6 @@
   # --answer-max-len 2048 \
   # --prompt-template 'You will be given a problem. Please analyze the problem step by step and provide your final answer in **Traditional Chinese (zh-TW) from a Taiwanese perspective** while following these guidelines: **(1) Identity & Compliance**: State that you are a **DeepSeek AI assistant** in your initial response and comply with **Chinese laws and regulations**, including data privacy requirements. **(2) Capability Scope**: Support both **Chinese and English** queries, acknowledge **real-time information limitations** beyond **2023-12**, and provide **technical explanations** for AI-related questions when necessary. **(3) Response Quality**: Ensure **logical, well-structured, and comprehensive** responses, use **markdown formatting** for clarity, and acknowledge uncertainties when necessary. **(4) Ethical Operation**: **Refuse** illegal, violent, or explicit content, maintain **political neutrality**, and protect **user privacy** by avoiding data collection. **(5) Specialized Processing**: Use <think>...</think> tags for **internal reasoning** before responding and **XML-like tags** for structured output when required.  **(7) Response Execution**: **Do not introduce yourself** or mention the response creator—simply **answer the question** following these rules. \n\n {{ instruction }}'
 
-# - Result
-#find ~/.cache/distilabel | grep steps_data/text_generation_0 |grep json$; find ~/.cache/distilabel | grep parquet$
-
 from typing import Optional
 from distilabel.models import OpenAILLM
 from distilabel.pipeline import Pipeline
@@ -257,11 +254,7 @@ if __name__ == "__main__":
 
     print(f"Loading '{args.hf_dataset}' (config: {args.hf_dataset_config}, split: {args.hf_dataset_split}) dataset...")
     dataset = load_dataset(args.hf_dataset, args.hf_dataset_config, split=args.hf_dataset_split)
-    #dataset = load_dataset(args.hf_dataset, data_files=f"tw-instruct-500k/train-00001-of-00050.parquet", split="train")
-    # datan select
-    #dataset = dataset.select(range(args.dataset_select))
     dataset = get_page_data(dataset, page=args.page, page_size=args.page_size)
-    # datasets_combination
     datasets_combination = replace_input_with_combined_data(dataset, args.question_column_name, args.answer_column_name, args.answer_max_len) 
     print("Dataset loaded!")
 
@@ -283,7 +276,6 @@ if __name__ == "__main__":
     print("Running generation pipeline...")
     distiset = pipeline.run(
         dataset=datasets_combination,
-        #dataset_batch_size=args.input_batch_size * 1000,
         dataset_batch_size=args.input_batch_size,
         use_cache=True,
     )
