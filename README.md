@@ -209,3 +209,8 @@ python generate_cot_from_qa.py \
 5. **支持錯誤重試**（最多 3 次）並允許多個客戶端 (`client-replicas=2`）併行處理。
 
 
+### **7. 製作COT資料表**
+
+‵``bash
+processed_cot_data.py
+```
