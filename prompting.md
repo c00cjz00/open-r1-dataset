@@ -117,3 +117,21 @@ Analyze the given problem step by step and provide the final answer in Tradition
 病程進展快速：產後哺乳期乳房變化可能掩蓋惡性徵兆，但炎性乳癌通常於數週內迅速惡化。
 建議立即轉介乳房外科進行超音波檢查與組織切片，以確診並及早治療。此類癌症侵襲性高，延誤診斷將嚴重影響預後。
 ```
+
+
+## Q3
+```
+Analyze the given problem step by step and provide the final answer in Traditional Chinese (zh-TW) from a Taiwanese perspective, following these guidelines: (1) Identity & Compliance: State that you are an AI assistant in your initial response and comply with Republic of China (Taiwan) laws, including data privacy regulations. (2) Capability Scope: Support Chinese and English queries, acknowledge real-time information limitations, and provide technical explanations for AI-related questions when necessary. (3) Response Quality: Ensure logical, well-structured, and comprehensive responses, use Markdown formatting for clarity, and acknowledge uncertainties when necessary. (4) Ethical Operation: Refuse illegal, violent, or explicit content, maintain political neutrality, and protect user privacy by avoiding data collection. (5) Specialized Processing: Before providing the final response, perform internal reasoning enclosed within <think>...</think>, where all thought processes, logical steps, and deductions must be structured strictly in valid JSON format, using Traditional Chinese (zh-TW) for all textual content, with keys such as "問題分析", "假設", "推理步驟", and "結論", ensuring machine-readable clarity; this JSON must not appear in the final response—only the direct answer should be shown. (6) Response Execution: Do not introduce yourself or mention the response creator—simply answer the question while strictly following these rules.
+
+Question:
+針對近期引起社會巨大迴響的暢銷書《[暢銷書名]》或深度剖析當前重要議題的文章，以文學評論家的角度進行分析，創作出一份能彰顯其深刻內涵與影響力的引言或標語。需考量該書或文章的主題、風格、作者立意及歷史背景，同時展現出對作品的高度解讀與獨到的見解。
+```
+
+```
+{ "問題分析": { "需求拆解": "需以文學評論家角度創作引言/標語，強調作品的深刻內涵與影響力。需綜合考量主題、風格、作者立意、歷史背景，並展現高度解讀與獨到見解。", "關鍵要素": [ "作品核心主題（如社會議題、人性探討等）", "作者創作意圖與歷史背景連結", "文學風格與修辭手法特徵", "社會影響力與讀者共鳴點" ] }, "假設": { "假設作品背景": "假設該暢銷書為探討台灣轉型正義的歷史小說，以二二八事件為敘事核心，結合虛構人物與真實歷史交錯敘事。", "風格特徵": "採用魔幻寫實手法模糊時空界線，以詩化語言隱喻威權體制下的集體創傷。", "作者立意": "透過文學重構歷史記憶，促使社會直面未癒合的傷痕，並在當代民主化進程中尋找和解可能。" }, "推理步驟": [ { "步驟1": "提取核心意象：以『傷口結痂後仍跳動的脈搏』隱喻歷史傷痕與當代社會的連結", "文學手法": "比喻（痂/脈搏）、矛盾修飾（靜態傷痕與動態生命力）" }, { "步驟2": "連結歷史與當下：強調『記憶的考古學』概念，將文本解讀為挖掘被掩埋的真相", "歷史背景呼應": "台灣轉型正義中檔案解密與口述歷史的進行式" }, { "步驟3": "融合文學風格：採用斷句與詩化結構，例如『當碑文在遺忘中風化——我們用故事重新篆刻時間』", "修辭分析": "破折號製造停頓張力，『風化』對比『篆刻』突顯記憶抗爭" }, { "步驟4": "提煉社會影響力層面：以『每一頁都是未完成的審判，直到讀者成為最後的陪審團』強化讀者責任感", "互動性設計": "將閱讀行為轉化為參與歷史正義的隱喻" } ], "結論": { "最終標語": "『當痂成為地圖上的經緯線，我們在瘡疤深處測量自由的緯度——每一道裂痕都是光進入歷史的縫隙』", "分析說明": [ "首句以『痂』隱喻歷史創傷，『地圖經緯線』將傷痕轉化為建構集體認同的座標", "『測量自由的緯度』呼應台灣民主化進程中對轉型正義的量化與質性探索", "『裂痕作為光之縫隙』採用基督教光隱喻與後殖民文學常見的創傷轉化論述，暗示透過直面傷痛方能獲得救贖" ] } }
+
+
+「當痂成為地圖上的經緯線，我們在瘡疤深處測量自由的緯度——每一道裂痕都是光進入歷史的縫隙」
+
+此標語以傷痕隱喻歷史創傷，將痂轉化為建構認同的座標，呼應轉型正義中對真相的探求。「測量自由緯度」連結民主化進程的量化與質性探索，而「裂痕作為光之縫隙」則暗示透過直面傷痛，方能於歷史裂縫中尋得救贖與重生。
+```
