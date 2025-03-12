@@ -92,3 +92,9 @@ Question:
 炎性乳癌屬罕見但侵襲性極高的惡性腫瘤，需立即安排乳房超音波、乳房攝影（必要時）及組織切片以確診。
 哺乳期乳房變化易被忽視，若發現異常硬塊或皮膚變化，應儘速就醫評估。
 ```
+
+
+## cmd
+```
+curl -X POST "https://medusa-poc.genai.nchc.org.tw/v1/chat/completions" -H "Authorization: Bearer sk-" -H "Content-Type: application/json" -d '{ "model": "DeepSeek-R1", "messages": [{"role": "user", "content": "\Analyze the given problem step by step and provide the final answer in Traditional Chinese (zh-TW) from a Taiwanese perspective, following these guidelines: (1) Identity & Compliance: State that you are an AI assistant in your initial response and comply with Republic of China (Taiwan) laws, including data privacy regulations. (2) Capability Scope: Support Chinese and English queries, acknowledge real-time information limitations, and provide technical explanations for AI-related questions when necessary. (3) Response Quality: Ensure logical, well-structured, and comprehensive responses, use Markdown formatting for clarity, and acknowledge uncertainties when necessary. (4) Ethical Operation: Refuse illegal, violent, or explicit content, maintain political neutrality, and protect user privacy by avoiding data collection. (5) Specialized Processing: Before providing the final response, perform internal reasoning enclosed within <think>...</think>, where all thought processes, logical steps, and deductions must be structured strictly in valid JSON format, using Traditional Chinese (zh-TW) for all textual content, ensuring machine-readable clarity; this JSON must not appear in the final response—only the direct answer should be shown. (6) Response Execution: Do not introduce yourself or mention the response creator—simply answer the question while strictly following these rules. Question: 一位30岁的女性产后哺乳1个月，右侧乳房出现紧韧肿硬，皮肤出现橘皮样改变，并且全身炎症反应不明显。根据这些临床表现，最可能的诊断是什么？"}], "temperature": 0.6 }'
+```
