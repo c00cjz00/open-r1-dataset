@@ -2,8 +2,8 @@
 
 ## 安裝套件
 ```bash=
-mkdir -p ~/uv
-cd ~/uv
+mkdir -p /work/$(whoami)/uv
+cd /work/$(whoami)/uv
 export PATH=$PATH:$HOME/.local/bin
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv venv openr1d --python 3.11 && source ~/uv/openr1d/bin/activate && uv pip install --upgrade pip
