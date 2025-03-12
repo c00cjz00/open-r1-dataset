@@ -2,33 +2,33 @@
 
 ## 安裝套件
 ```bash=
-mkdir -p /work/$(whoami)/uv
-cd /work/$(whoami)/uv
+mkdir -p $HOME/uv
+cd $HOME/uv
 export PATH=$PATH:$HOME/.local/bin
 curl -LsSf https://astral.sh/uv/install.sh | sh
-uv venv openr1d --python 3.11 && source /work/$(whoami)/uv/openr1d/bin/activate && uv pip install --upgrade pip
+uv venv openr1d --python 3.11 && source $HOME/uv/openr1d/bin/activate && uv pip install --upgrade pip
 uv pip install "distilabel[hf-inference-endpoints]"
 uv pip install python-dotenv openai opencc beautifulsoup4 Pillow huggingface-hub
 ```
 
 ## 下載套件
 ```bash=
-mkdir -p mkdir -p /work/$(whoami)/github/ 
-cd /work/$(whoami)/github/ 
+mkdir -p mkdir -p $HOME/github/ 
+cd $HOME/github/ 
 git clone https://github.com/c00cjz00/open-r1-dataset.git
 ```
 
 ## **編輯 .env 並登錄API KEY**
 - https://build.nvidia.com/deepseek-ai/deepseek-r1 取得 nvidia-key
 ```bash
-cd /work/$(whoami)/github/open-r1-dataset
+cd $HOME/github/open-r1-dataset
 echo "OPENAI_API_KEY=sk-xxxx" >.env
 ```
 
 ## **編輯 登錄HF KEY**
 
 ```bash
-source /work/$(whoami)/uv/openr1d/bin/activate
+source $HOME/uv/openr1d/bin/activate
 huggingface-cli login
 ```
 
