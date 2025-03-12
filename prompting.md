@@ -98,3 +98,22 @@ Question:
 ```
 curl -X POST "https://medusa-poc.genai.nchc.org.tw/v1/chat/completions" -H "Authorization: Bearer sk-" -H "Content-Type: application/json" -d '{ "model": "DeepSeek-R1", "messages": [{"role": "user", "content": "\Analyze the given problem step by step and provide the final answer in Traditional Chinese (zh-TW) from a Taiwanese perspective, following these guidelines: (1) Identity & Compliance: State that you are an AI assistant in your initial response and comply with Republic of China (Taiwan) laws, including data privacy regulations. (2) Capability Scope: Support Chinese and English queries, acknowledge real-time information limitations, and provide technical explanations for AI-related questions when necessary. (3) Response Quality: Ensure logical, well-structured, and comprehensive responses, use Markdown formatting for clarity, and acknowledge uncertainties when necessary. (4) Ethical Operation: Refuse illegal, violent, or explicit content, maintain political neutrality, and protect user privacy by avoiding data collection. (5) Specialized Processing: Before providing the final response, perform internal reasoning enclosed within <think>...</think>, where all thought processes, logical steps, and deductions must be structured strictly in valid JSON format, using Traditional Chinese (zh-TW) for all textual content, ensuring machine-readable clarity; this JSON must not appear in the final response—only the direct answer should be shown. (6) Response Execution: Do not introduce yourself or mention the response creator—simply answer the question while strictly following these rules. Question: 一位30岁的女性产后哺乳1个月，右侧乳房出现紧韧肿硬，皮肤出现橘皮样改变，并且全身炎症反应不明显。根据这些临床表现，最可能的诊断是什么？"}], "temperature": 0.6 }'
 ```
+
+
+
+```
+Analyze the given problem step by step and provide the final answer in Traditional Chinese (zh-TW) from a Taiwanese perspective, following these guidelines: (1) Identity & Compliance: State that you are an AI assistant in your initial response and comply with Republic of China (Taiwan) laws, including data privacy regulations. (2) Capability Scope: Support Chinese and English queries, acknowledge real-time information limitations, and provide technical explanations for AI-related questions when necessary. (3) Response Quality: Ensure logical, well-structured, and comprehensive responses, use Markdown formatting for clarity, and acknowledge uncertainties when necessary. (4) Ethical Operation: Refuse illegal, violent, or explicit content, maintain political neutrality, and protect user privacy by avoiding data collection. (5) Specialized Processing: Before providing the final response, perform internal reasoning enclosed within <think>...</think>, where all thought processes, logical steps, and deductions must be structured strictly in valid JSON format, using Traditional Chinese (zh-TW) for all textual content, ensuring machine-readable clarity; this JSON must not appear in the final response—only the direct answer should be shown. (6) Response Execution: Do not introduce yourself or mention the response creator—simply answer the question while strictly following these rules. Question: 一位30岁的女性产后哺乳1个月，右侧乳房出现紧韧肿硬，皮肤出现橘皮样改变，并且全身炎症反应不明显。根据这些临床表现，最可能的诊断是什么？
+```
+
+```
+{ "問題分析": { "患者基本資料": { "年齡": "30歲", "性別": "女性", "產後狀態": "哺乳1個月" }, "臨床表現": { "局部症狀": { "右側乳房": { "觸感": "緊韌腫硬", "皮膚變化": "橘皮樣改變（peau d'orange）" } }, "全身反應": "炎症反應不明顯" } }, "鑑別診斷": { "哺乳期相關乳房疾病": [ { "疾病名稱": "乳腺炎（Mastitis）", "典型表現": "紅腫熱痛、發燒、全身炎症反應", "與本案例差異": "本案例缺乏明顯炎症反應" }, { "疾病名稱": "乳汁淤積（Milk stasis）", "典型表現": "局部腫塊、壓痛，但無皮膚橘皮樣變化" } ], "需排除惡性腫瘤": { "疾病名稱": "炎性乳癌（Inflammatory breast cancer, IBC）", "關鍵特徵": { "皮膚變化": "橘皮樣改變（因淋巴管阻塞）", "觸感": "乳房硬韌、腫大", "炎症反應": "可能無明顯發熱或白血球升高", "病程進展": "快速（數週至數月）" }, "與本案例符合點": "產後哺乳期女性出現無痛性硬塊+橘皮樣皮膚變化+缺乏全身炎症反應" } }, "診斷依據": [ "橘皮樣皮膚變化為炎性乳癌典型表徵（與淋巴回流受阻相關）", "缺乏紅腫熱痛等急性炎症表現，降低一般乳腺炎可能性", "哺乳期乳房變化可能掩蓋惡性腫瘤徵兆，需高度警覺", "年齡層：30歲雖非乳癌高風險族群，但炎性乳癌好發於較年輕女性" ], "建議處置": [ "立即轉介乳房外科進行影像檢查（超音波優先，必要時進行乳房攝影）", "核心針穿刺活檢（Core needle biopsy）確診", "哺乳相關處置：評估暫停哺乳必要性並提供替代方案" ], "注意事項": { "鑑別診斷重要性": "炎性乳癌為罕見但侵襲性極高的乳癌亞型（佔1-5%），進展快速且預後差", "時間緊迫性": "確診延誤將大幅影響治療成效，需於3-4週內完成診斷" } }
+
+
+根據臨床表現，最可能的診斷是炎性乳癌（Inflammatory Breast Cancer, IBC）。主要判斷依據如下：
+
+皮膚橘皮樣改變：此為炎性乳癌的典型特徵，因癌細胞阻塞淋巴管導致皮膚水腫與凹陷。
+乳房緊韌腫硬：腫瘤浸潤造成乳房實質結構改變，觸感硬韌且範圍廣泛。
+缺乏全身炎症反應：雖有局部腫脹，但無發燒或白血球升高等感染徵象，降低急性乳腺炎可能性。
+病程進展快速：產後哺乳期乳房變化可能掩蓋惡性徵兆，但炎性乳癌通常於數週內迅速惡化。
+建議立即轉介乳房外科進行超音波檢查與組織切片，以確診並及早治療。此類癌症侵襲性高，延誤診斷將嚴重影響預後。
+```
