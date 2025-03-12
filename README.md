@@ -210,7 +210,11 @@ python generate_cot_from_qa.py \
 5. **支持錯誤重試**（最多 2 次）並允許多個客戶端 (`client-replicas=1`）併行處理。
 
 
-## 指令三: 製作COT資料表**
+## 觀看結果
+連上 https://huggingface.co/c00cjz00
+
+
+## 補充指令: 製作COT資料表**
 
 ```bash
 processed_cot_data.py
