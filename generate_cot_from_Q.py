@@ -282,7 +282,7 @@ if __name__ == "__main__":
     )
     print("Generation pipeline finished!")
         
-    #if args.hf_output_dataset:
-    #    print(f"Pushing resulting dataset to '{args.hf_output_dataset}'...")
-    #    distiset.push_to_hub(args.hf_output_dataset, private=args.private)
-    #    print("Dataset pushed!")
+    if args.hf_output_dataset:
+       print(f"Pushing resulting dataset to '{args.hf_output_dataset}'...")
+       distiset.push_to_hub(args.hf_output_dataset, private=args.private)
+       print("Dataset pushed!")
