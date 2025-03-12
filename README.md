@@ -13,22 +13,22 @@ uv pip install python-dotenv openai opencc beautifulsoup4 Pillow huggingface-hub
 
 ## 下載套件
 ```bash=
-mkdir -p ~/github/ 
-cd ~/github
+mkdir -p mkdir -p /work/$(whoami)/github/ 
+cd /work/$(whoami)/github/ 
 git clone https://github.com/c00cjz00/open-r1-dataset.git
 ```
 
 ## **編輯 .env 並登錄API KEY**
 - https://build.nvidia.com/deepseek-ai/deepseek-r1 取得 nvidia-key
 ```bash
-cd ~/github/open-r1-dataset
+cd /work/$(whoami)/github/open-r1-dataset
 echo "OPENAI_API_KEY=sk-xxxx" >.env
 ```
 
 ## **編輯 登錄HF KEY**
 
 ```bash
-source ~/uv/openr1d/bin/activate
+source /work/$(whoami)/uv/openr1d/bin/activate
 huggingface-cli login
 ```
 
