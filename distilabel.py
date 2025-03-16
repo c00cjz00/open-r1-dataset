@@ -113,7 +113,8 @@ def run_pipeline(page, template_name    ):
     with Pipeline(name=pipeline_id) as pipeline:
         TextGeneration(
             llm=OpenAILLM(
-                base_url="https://medusa-poc.genai.nchc.org.tw/v1",  # OpenAI LLM 服務的基礎 URL
+                #base_url=r"http://gn0703:8000/v1",
+                base_url=r"https://medusa-poc.genai.nchc.org.tw/v1",  # OpenAI LLM 服務的基礎 URL
                 api_key=OPENAI_API_KEY,  # 使用環境變數讀取 API 金鑰
                 model="QwQ-32B",  # 指定要使用的語言模型
                 generation_kwargs={"temperature": 0.6, "max_new_tokens": 4096},  # 設定生成參數
@@ -121,18 +122,18 @@ def run_pipeline(page, template_name    ):
                 max_retries=6,  # 最大重試次數
             ),
             #system_prompt=SYSTEM_PROMPT,
-            input_batch_size=4,  # 每次處理的輸入批次大小
+            input_batch_size=8,  # 每次處理的輸入批次大小
             template=template,  # 使用自訂的 Prompt 模板
             columns=["question", "response"],
             num_generations=1,  # 每個輸入要產生的回應數量
             group_generations=False,  # 是否將多個生成結果分組 (預設為 False，每個生成的結果都是獨立的)
-            resources=StepResources(replicas=4),  # 設定此步驟的副本數量 (提高並行處理能力)
+            resources=StepResources(replicas=8),  # 設定此步驟的副本數量 (提高並行處理能力)
         )
 
     # 載入測試資料集 FreedomIntelligence/medical-o1-reasoning-SFT
     #dataset = load_dataset("FreedomIntelligence/medical-o1-reasoning-SFT", "en", split="train")
     dataset = load_dataset("c00cjz00/Medical-R1-Distill-Data", "default", split="train")
-    page_size = 16
+    page_size = 64
     start = (page - 1) * page_size
     end = min(start + page_size, len(dataset))
     dataset = dataset.select(range(start, end))
