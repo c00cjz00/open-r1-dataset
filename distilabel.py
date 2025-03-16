@@ -1,4 +1,6 @@
 # python distilabel.py --page 5 --template "CUSTOM_TEMPLATE03"
+# cat cmd.sh | /home/c00cjz00/.local/bin/parallel -j 4
+
 import argparse
 import os
 from dotenv import load_dotenv
