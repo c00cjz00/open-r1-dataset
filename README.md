@@ -1,6 +1,6 @@
 # 知識蒸餾 (Think) 生成   
 
-## 安裝套件
+## 安裝套件 (I)
 ```bash=
 mkdir -p $HOME/uv
 cd $HOME/uv
@@ -10,7 +10,16 @@ uv venv openr1d --python 3.11 && source $HOME/uv/openr1d/bin/activate && uv pip 
 uv pip install "distilabel[hf-inference-endpoints]"
 uv pip install python-dotenv openai opencc beautifulsoup4 Pillow huggingface-hub
 ```
-
+## 安裝套件 (II)
+```bash=
+mkdir -p /work/$(whoami)/uv
+cd /work/$(whoami)/uv
+export PATH=$PATH:$HOME/.local/bin
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv venv openr1d --python 3.11 && source /work/$(whoami)/uv/openr1d/bin/activate && uv pip install --upgrade pip
+uv pip install "distilabel[hf-inference-endpoints]"
+uv pip install python-dotenv openai opencc beautifulsoup4 Pillow huggingface-hub
+```
 ## 下載套件
 ```bash=
 mkdir -p mkdir -p $HOME/github/ 
